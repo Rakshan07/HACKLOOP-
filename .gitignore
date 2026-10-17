@@ -1,3 +1,10 @@
+# Node
+node_modules/
+frontend/node_modules/
+frontend/dist/
+frontend/.temp/
+dist/
+
 # Python
 __pycache__/
 *.py[cod]
@@ -5,6 +12,10 @@ __pycache__/
 *.so
 .Python
 env/
+venv/
+.venv/
+backend/.venv/
+ENV/
 build/
 develop-eggs/
 dist/
@@ -15,20 +26,15 @@ lib/
 lib64/
 parts/
 sdist/
-var/
 wheels/
 *.egg-info/
 .installed.cfg
 *.egg
 
-# Virtual Environment
-venv/
-.venv/
-ENV/
-
 # Environment Variables
 .env
 .env.local
+backend/.env
 
 # IDE
 .vscode/*
@@ -40,5 +46,10 @@ ENV/
 
 # Testing & Coverage
 .pytest_cache/
+backend/.pytest_cache/
 .coverage
 htmlcov/
+
+# OS
+.DS_Store
+Thumbs.db
