@@ -1,0 +1,225 @@
+/* Owner: Member 1. Look: a dark archive with paper ephemera, inspired by the reference image. */
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Cormorant Garamond", "Times New Roman", serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+
+  --color-vault: #151515;
+  --color-vault-2: #212121;
+  --color-bone: #ece7dc;
+  --color-dust: #a8a396;
+  --color-signal: #ffe03a;
+  --color-cobalt: #1f46dc;
+  --color-alarm: #e5161d;
+  --color-card-blue: #a8d3e6;
+  --color-card-manila: #ecdfae;
+  --color-card-rose: #e6a3a7;
+  --color-matte: #e8e3d5;
+  --color-ink: #1b1b1b;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--color-vault);
+  color: var(--color-bone);
+  font-family: var(--font-mono);
+  -webkit-font-smoothing: antialiased;
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-signal);
+  outline-offset: 3px;
+}
+
+.skip-link {
+  position: absolute;
+  left: -999px;
+  top: 8px;
+  background: var(--color-signal);
+  color: var(--color-ink);
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  z-index: 50;
+}
+.skip-link:focus {
+  left: 8px;
+}
+
+/* ---------- Buttons ---------- */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: var(--color-signal);
+  color: var(--color-ink);
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 0.95rem;
+  padding: 0.95rem 1.7rem;
+  border-radius: 999px;
+  border: 0;
+  cursor: pointer;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+.pill:hover:not(:disabled) {
+  background: #fff06b;
+  transform: translateY(-2px);
+}
+.pill:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.pill-outline {
+  background: transparent;
+  color: var(--color-bone);
+  box-shadow: inset 0 0 0 1.5px rgb(236 231 220 / 0.55);
+}
+.pill-outline:hover:not(:disabled) {
+  background: rgb(236 231 220 / 0.12);
+}
+.close-dot {
+  display: inline-grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 999px;
+  border: 0;
+  background: var(--color-alarm);
+  color: #fff;
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+.close-dot:hover {
+  transform: scale(1.08);
+}
+
+/* ---------- Blue speech-bubble callout (the "real fact" lives here) ---------- */
+.callout {
+  position: relative;
+  background: var(--color-cobalt);
+  color: #fff;
+  border-radius: 1.5rem;
+  padding: 1.1rem 1.25rem 1.2rem;
+}
+.callout::before {
+  content: "";
+  position: absolute;
+  left: -9px;
+  top: 22px;
+  border: 9px solid transparent;
+  border-right-color: var(--color-cobalt);
+  border-left: 0;
+}
+
+/* ---------- Paper ephemera ---------- */
+.paper {
+  color: var(--color-ink);
+  box-shadow: 0 14px 30px rgb(0 0 0 / 0.55);
+}
+.matte {
+  background: var(--color-matte);
+  color: var(--color-ink);
+  box-shadow: 0 18px 40px rgb(0 0 0 / 0.6);
+}
+
+/* The memorable element: choices are index cards pulled from a drawer. */
+.choice {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  text-align: left;
+  min-height: 9.5rem;
+  padding: 1.1rem 1.15rem;
+  border: 0;
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: var(--font-mono);
+  color: var(--color-ink);
+  box-shadow: 0 14px 28px rgb(0 0 0 / 0.55);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.choice:hover:not(:disabled),
+.choice:focus-visible {
+  transform: rotate(0deg) translateY(-6px);
+  box-shadow: 0 22px 36px rgb(0 0 0 / 0.65);
+}
+.choice:disabled {
+  cursor: wait;
+  filter: saturate(0.4) brightness(0.8);
+}
+.choice-blue {
+  background: var(--color-card-blue);
+  transform: rotate(-1.8deg);
+}
+.choice-manila {
+  background: var(--color-card-manila);
+  transform: rotate(1.2deg);
+}
+.choice-rose {
+  background: var(--color-card-rose);
+  transform: rotate(-0.8deg);
+}
+
+/* ---------- Progress and motion ---------- */
+.bar {
+  position: relative;
+  height: 4px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgb(236 231 220 / 0.18);
+}
+.bar::after {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 35%;
+  border-radius: 999px;
+  background: var(--color-signal);
+  animation: slide 1.4s ease-in-out infinite;
+}
+@keyframes slide {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(300%);
+  }
+}
+
+.reveal {
+  animation: reveal 0.5s ease-out both;
+}
+@keyframes reveal {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal,
+  .bar::after {
+    animation: none;
+  }
+  .bar::after {
+    width: 100%;
+    opacity: 0.6;
+  }
+  .choice,
+  .pill,
+  .close-dot {
+    transition: none;
+  }
+}
